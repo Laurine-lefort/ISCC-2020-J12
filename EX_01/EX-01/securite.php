@@ -1,12 +1,4 @@
 <?php
-    $login=$_POST ['login'];
-    $password=$_POST['password'];
-
-    if ($password == "2020"){
-        session_start();
-        $_SESSION['id']= $login;
-        setcookie('id', $_SESSION['id'], time() + 365*24*3600, null, null, false, true);
-        header('Location: http://localhost:8888/ISCC-2020/ISCC-2020-J09/EX-01/mini-site-routing.php?page=1'); {
             function connected_data() {    
                 $servername = "localhost"; 
                 $username = 'root';    
@@ -16,17 +8,22 @@
                    $pdo = new PDO("mysql:host=$servername;dbname=$databasename", $username, $password);  
                    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
                   
-                   echo "Connected successfully<br/>";   
+                   echo "<h3>Connected successfully<h3/>";   
           
              }  
                     catch (PDOException $e) {        
-                        echo "Connection failed : ". $e->getMessage();  
+                        echo "<h3>Connection failed</h3>". $e->getMessage();  
                           } 
-                       }
-            connected_data();
-            
-        }
-    }
+
+  $sth->excecute(array('admin','login'));
+  $login =$sth->fetchAll();
+
+  $sth->execute(array('2020', 'password'));
+  $password= $sth->fetchAll();
+     }
+
+$pdo=connected_data();
+
 
   
     ?>
