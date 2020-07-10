@@ -1,19 +1,16 @@
 <?php
 
-$extension= array('png', 'jpg', 'jpeg');
-$taille_maxi=2097152;
-$taille= filesize($_FILES ['avatar']['tmp_name']);
+$name =$_FILES;
+if ( strlen(explode('.',$name)[0])<5)
+{
+    echo "Le fichier n'est pas valide.";
+}
+else
+{
+    echo"<p>Nom du fichier:" .$_FILES['userfile']['name']. "</p>";
+    echo"<p>Type du fichier:" .$_FILES['userfile']['type']. "</p>";
+    echo"<p>Taille du fichier:" .$_FILES['userfile']['size']. "</p>";
+    echo"<p>Description:" .$_FILES['description']. "</p>";
 
-if($taille>$taille_maxi)
-{
-    echo'<p>Le fichier est trop gros.</p>';
-}
-if(!in_array($extension))
-{
-    echo'<p>Vous pouvez uploader un fichier de type png, jpg ou jpeg.</p>';
-}
-if(str_len($var_nom)<4)
-{
-    echo'<p>Le nom est trop court, minimum 4 caractères.</p>';
 }
 ?>
