@@ -66,5 +66,5 @@
 
   
 ?>
-</body>
+</footer>
 </html>
