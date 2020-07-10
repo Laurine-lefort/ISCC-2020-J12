@@ -9,9 +9,16 @@
   <a href="http://localhost:8888/ISCC-2020/ISCC-2020-J09/EX-01/mini-site-routing.php?page=2">Page 1</a>
   <a href="http://localhost:8888/ISCC-2020/ISCC-2020-J09/EX-01/mini-site-routing.php?page=3">Page 2</a>
   <a href="http://localhost:8888/ISCC-2020/ISCC-2020-J09/EX-01/connexion.php?page=connexion">Page connexion</a>
-  <a href="http://localhost:8888/ISCC-2020/ISCC-2020-J09/EX-01/admin.php?page=admin">Page admin</a>
+ 
     <?php
-    session_start();
+    if ($_COOKIE['id'])
+    {
+    echo'<a href="http://localhost:8888/ISCC-2020/ISCC-2020-J09/EX-01/admin.php?page=admin">Page admin</a>';
+}
+    ?>
+
+
+    <?php
     if($_GET['page'] == 1){
        echo'<h1>Accueil !</h1>';
        
@@ -31,17 +38,30 @@
         include ("admin.php");
     }
     ?>
+<form enctype="multipart/form-data" action="admin.php" method="post">
+<imput type="hidden" name="MAX_FILE_SIZE" value="2097152"/>
+<imput name="userfile" type="file" accept="image/x-png.,image/jpg,image/jpeg" /><br>
+<imput name="description" type="text" placeholder="description" /><br>
+<imput name="titre" type="text" placeholder="Titre" />
+<imput type="submit" value="Envoyer le fichier" />
+</form>
+
 <?php
-    if(array_key_exists('id',$_SESSION)){
-    echo'Login: '.$_SESSION ['id']; 
+ echo $_FILES;
+?>
+</body>
+<footer>
+<?php
+    session_start();
+
+    if(isset($_SESSION["id"]))
+    {
+        echo '<p>Login: '.$_SESSION["id"]. '</p>';
+        echo '<p>description: '.$_SESSION["description"]. '</p>';
     }
-    if(!array_key_exists('id',$_SESSION)){
-        if($_COOKIE['id']) {
-            $_SESSION['id']=$_COOKIE['id'];    
-           }
            else {
-            echo"<p><a href='http://localhost:8888/ISCC-2020/ISCC-2020-J09/EX-01/connexion.php?page=connexion'>Revenir à page de connexion</a>";
-        }
+             header('http://localhost:8888/ISCC-2020/ISCC-2020-J09/EX-01/connexion.php?page=connexion');
+    
     }
 
   
